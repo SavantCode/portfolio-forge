@@ -1,0 +1,46 @@
+import { Globe, ArrowUpRight } from "lucide-react";
+import { experiences } from "@/data/portfolio";
+export function ExperienceList({ compact = false }: { compact?: boolean }) {
+  return (
+    <div>
+      {experiences.slice(0, compact ? 2 : undefined).map((job) => (
+        <article key={job.company} className="experience-item">
+          <div className="flex flex-wrap justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-3">
+                <h3 className="text-xl font-semibold">{job.company}</h3>
+                <Globe className="text-muted-foreground" size={15} />
+                <ArrowUpRight className="text-muted-foreground" size={15} />
+                {job.current && (
+                  <span className="status-tag">
+                    <span /> Working
+                  </span>
+                )}
+              </div>
+              <p className="text-muted-foreground mt-2 text-lg">{job.role}</p>
+            </div>
+            <div className="text-muted-foreground text-sm md:text-right leading-7">
+              <p>{job.period}</p>
+              <p>{job.location}</p>
+            </div>
+          </div>
+          <p className="mt-5 text-muted-foreground leading-7">{job.description}</p>
+          {!compact && (
+            <ul className="list-disc pl-5 mt-4 space-y-2 text-muted-foreground">
+              {job.highlights.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          )}
+          <div className="flex flex-wrap gap-2 mt-5">
+            {job.tags.map((tag) => (
+              <span className="eyebrow-tag" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
