@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
   head: () =>
     pageHead(
       "Full-stack Developer",
-      "Alex Morgan — building thoughtful digital experiences, modern web applications, and open-source tools.",
+      "Rahul Kushwaha — building thoughtful digital experiences, modern web applications, and open-source tools.",
     ),
   component: Home,
 });
@@ -26,7 +26,7 @@ function Home() {
             src={portrait}
             width={128}
             height={128}
-            alt="Alex Morgan"
+            alt="Rahul Kushwaha"
           />
           <div>
             <div className="availability">

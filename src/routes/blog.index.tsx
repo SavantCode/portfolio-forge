@@ -5,19 +5,23 @@ import { articles } from "@/data/portfolio";
 import { PageHeading } from "@/components/portfolio/page-heading";
 import { Button } from "@/components/ui/button";
 import { pageHead } from "@/lib/seo";
+
 export const Route = createFileRoute("/blog/")({
   head: () =>
     pageHead("Blog", "Notes on web development, design engineering, and building better products."),
   component: Blog,
 });
+
 function Blog() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
+
   const filtered = articles.filter(
     (a) =>
       (category === "All" || a.category === category) &&
       (a.title + a.excerpt).toLowerCase().includes(query.toLowerCase()),
   );
+
   return (
     <>
       <PageHeading
@@ -26,7 +30,7 @@ function Blog() {
       />
       <div className="blog-tools">
         <div className="flex gap-2 flex-wrap">
-          {["All", "Development", "Design Engineering"].map((c) => (
+          {["All", "Development", "Design Engineering", "Software Engineering"].map((c) => (
             <Button
               key={c}
               variant={category === c ? "default" : "secondary"}

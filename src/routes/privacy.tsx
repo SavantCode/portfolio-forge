@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHeading } from "@/components/portfolio/page-heading";
 import { pageHead } from "@/lib/seo";
 export const Route = createFileRoute("/privacy")({
-  head: () => pageHead("Privacy", "Privacy information for Alex Morgan’s personal portfolio."),
+  head: () => pageHead("Privacy", "Privacy information for Rahul Kushwaha’s personal portfolio."),
   component: Privacy,
 });
 function Privacy() {

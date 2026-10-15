@@ -1,7 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { articles } from "@/data/portfolio";
 import { pageHead } from "@/lib/seo";
+
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
     const article = articles.find((a) => a.slug === params.slug);
@@ -11,39 +13,32 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) =>
     pageHead(
       loaderData?.title ?? "Article unavailable",
-      loaderData?.excerpt ?? "Notes by Alex Morgan.",
+      loaderData?.excerpt ?? "Notes by Rahul Kushwaha.",
     ),
   component: Article,
 });
+
 function Article() {
   const article = Route.useLoaderData();
+
   return (
     <>
       <Link to="/blog" className="subtle-link mb-10">
         <ArrowLeft size={16} /> All writing
       </Link>
+      
       <span className="eyebrow-tag">{article.category}</span>
       <h1 className="case-title">{article.title}</h1>
+      
       <p className="text-muted-foreground mt-4">
         {article.date} · {article.readTime}
       </p>
+      
       <p className="case-description">{article.excerpt}</p>
+
+      {/* Joins your paragraph array into a single markdown stream so headers & code blocks render properly */}
       <div className="prose-content border-t border-border pt-8 mt-8">
-        {article.paragraphs.map((p, i) => (
-          <section key={p}>
-            <h2>
-              {
-                [
-                  "Start with what matters",
-                  "Create clear boundaries",
-                  "Make the details intentional",
-                  "Keep improving",
-                ][i]
-              }
-            </h2>
-            <p>{p}</p>
-          </section>
-        ))}
+        <ReactMarkdown>{article.paragraphs.join("\n\n")}</ReactMarkdown>
       </div>
     </>
   );

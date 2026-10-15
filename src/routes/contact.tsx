@@ -10,7 +10,7 @@ export const Route = createFileRoute("/contact")({
   head: () =>
     pageHead(
       "Contact",
-      "Get in touch with Alex Morgan for web development and creative collaborations.",
+      "Get in touch with Rahul Kushwaha for web development and creative collaborations.",
     ),
   component: Contact,
 });

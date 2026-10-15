@@ -1,6 +1,6 @@
-ALEX MORGAN
+RAHUL KUSHWAHA
 Full-stack Developer
-hello@example.com | Bengaluru, India
+rahulkcoding2023@gmail.com | Bengaluru, India
 
 PROFILE
 Full-stack developer crafting accessible, performant web applications with React, TypeScript and Node.js.

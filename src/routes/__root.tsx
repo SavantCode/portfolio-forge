@@ -79,13 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Alex Morgan — Developer" },
+      { title: "Rahul Kushwaha — Developer" },
       {
         name: "description",
         content: "A personal portfolio of thoughtful web experiences and open-source projects.",
       },
-      { name: "author", content: "Alex Morgan" },
-      { property: "og:title", content: "Alex Morgan — Developer" },
+      { name: "author", content: "Rahul Kushwaha" },
+      { property: "og:title", content: "Rahul Kushwaha — Developer" },
       {
         property: "og:description",
         content: "Thoughtful web experiences and open-source projects.",
@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/portfolio rahul.svg", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

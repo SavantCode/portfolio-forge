@@ -37,6 +37,10 @@ function ProjectDetail() {
   const [expanded, setExpanded] = useState(preview);
   const [architecture, setArchitecture] = useState(false);
   const next = projects[(projects.findIndex((p) => p.slug === project.slug) + 1) % projects.length];
+
+  // new
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const projectImages = project.images && project.images.length > 0 ? project.images : [project.image];
   return (
     <>
       <div className="breadcrumbs">
@@ -46,13 +50,46 @@ function ProjectDetail() {
         <ChevronRight />
         <span>{project.name}</span>
       </div>
-      <img
+      {/* <img
         src={project.image}
         className="case-cover"
         alt={`${project.name} application preview`}
         width={1440}
         height={912}
-      />
+      /> */}
+      <div className="space-y-4">
+  <img
+    src={projectImages[activeImageIndex]}
+    className="case-cover rounded-xl transition-all duration-300"
+    alt={`${project.name} application preview`}
+    width={1440}
+    height={912}
+  />
+
+  {projectImages.length > 1 && (
+    <div className="flex gap-3 overflow-x-auto pb-2">
+      {projectImages.map((img, index) => (
+        <button
+          key={index}
+          onClick={() => setActiveImageIndex(index)}
+          className={`relative rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+            activeImageIndex === index
+              ? "border-primary scale-105 shadow-md"
+              : "border-transparent opacity-70 hover:opacity-100"
+          }`}
+        >
+          <img
+            src={img}
+            alt={`Thumbnail ${index + 1}`}
+            className="w-24 h-16 object-cover"
+          />
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+{/* // new ends here */}
       <div className="flex flex-wrap gap-2 mt-6">
         <span className="eyebrow-tag bg-secondary">{project.status}</span>
         {project.stack.map((t) => (

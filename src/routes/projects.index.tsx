@@ -9,7 +9,7 @@ export const Route = createFileRoute("/projects/")({
   head: () =>
     pageHead(
       "Projects",
-      "Selected web applications, open-source tools, and experiments by Alex Morgan.",
+      "Selected web applications, open-source tools, and experiments by Rahul Kushwaha.",
     ),
   component: Projects,
 });
