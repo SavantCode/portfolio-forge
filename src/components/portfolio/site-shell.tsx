@@ -1,20 +1,253 @@
-import { Link, useRouterState } from '@tanstack/react-router';
-import { useState, useEffect, type ReactNode } from 'react';
-import { Search, Moon, Sun, Volume2, VolumeX, Wrench, FlaskConical, X, ArrowUpRight, Heart, Github, Linkedin, Mail, Code2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { projects, articles, profile } from '@/data/portfolio';
-const navigation = [{ label: 'Home', to: '/' }, { label: 'Work', to: '/work' }, { label: 'Blog', to: '/blog' }, { label: 'Projects', to: '/projects' }, { label: 'Resume', to: '/resume' }] as const;
+import { Link, useRouterState } from "@tanstack/react-router";
+import { useState, useEffect, type ReactNode } from "react";
+import {
+  Search,
+  Moon,
+  Sun,
+  Volume2,
+  VolumeX,
+  Wrench,
+  FlaskConical,
+  X,
+  ArrowUpRight,
+  Heart,
+  Github,
+  Linkedin,
+  Mail,
+  Code2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { projects, articles, profile } from "@/data/portfolio";
+const navigation = [
+  { label: "Home", to: "/" },
+  { label: "Work", to: "/work" },
+  { label: "Blog", to: "/blog" },
+  { label: "Projects", to: "/projects" },
+  { label: "Resume", to: "/resume" },
+] as const;
 export function SocialLinks() {
- return <div className="social-links"><a href="https://github.com" target="_blank" rel="noreferrer" title="GitHub"><Github /></a><a href="https://linkedin.com" target="_blank" rel="noreferrer" title="LinkedIn"><Linkedin /></a><a href="https://codepen.io" target="_blank" rel="noreferrer" title="CodePen"><Code2 /></a><a href={`mailto:${profile.email}`} title="Email"><Mail /></a></div>;
+  return (
+    <div className="social-links">
+      <a href="https://github.com" target="_blank" rel="noreferrer" title="GitHub">
+        <Github />
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noreferrer" title="LinkedIn">
+        <Linkedin />
+      </a>
+      <a href="https://codepen.io" target="_blank" rel="noreferrer" title="CodePen">
+        <Code2 />
+      </a>
+      <a href={`mailto:${profile.email}`} title="Email">
+        <Mail />
+      </a>
+    </div>
+  );
 }
 export function SiteShell({ children }: { children: ReactNode }) {
- const pathname = useRouterState({ select: state => state.location.pathname });
- const [light, setLight] = useState(false); const [muted, setMuted] = useState(true); const [lens, setLens] = useState('eng'); const [search, setSearch] = useState(false); const [query, setQuery] = useState('');
- useEffect(() => { setLight(localStorage.getItem('portfolio-theme') === 'light'); }, []);
- useEffect(() => { document.documentElement.classList.toggle('light', light); }, [light]);
- useEffect(() => { const handler = (event: KeyboardEvent) => { if ((event.ctrlKey || event.metaKey) && event.key === 'k') { event.preventDefault(); setSearch(s => !s); } if (event.key === 'Escape') setSearch(false); }; window.addEventListener('keydown', handler); return () => window.removeEventListener('keydown', handler); }, []);
- useEffect(() => { setSearch(false); setQuery(''); }, [pathname]);
- const results = [...navigation.map(n => ({ title: n.label, to: n.to, kind: 'Page' })), ...projects.map(p => ({ title: p.name, to: '/projects' as const, kind: 'Project' })), ...articles.map(a => ({ title: a.title, to: '/blog' as const, kind: 'Article' }))].filter(r => r.title.toLowerCase().includes(query.toLowerCase()));
- const sound = () => { if (muted) return; const ctx = new AudioContext(); const osc = ctx.createOscillator(); const gain = ctx.createGain(); osc.connect(gain); gain.connect(ctx.destination); osc.frequency.value = 520; gain.gain.setValueAtTime(0.025, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + .09); osc.start(); osc.stop(ctx.currentTime + .09); osc.onended = () => { void ctx.close(); }; };
- return <><header className="site-header"><div className="nav-inner"><nav aria-label="Main navigation" onClick={sound}>{navigation.map(item => <Link key={item.label} to={item.to} className={pathname === item.to || (item.to !== '/' && pathname.startsWith(item.to)) ? 'nav-link active' : 'nav-link'}>{item.label}</Link>)}</nav><div className="header-tools"><div className="lens-switch" aria-label="Viewing lens"><Button variant="ghost" size="sm" title="Engineering lens" aria-pressed={lens === 'eng'} onClick={() => setLens('eng')} className={lens === 'eng' ? 'selected' : ''}><Wrench /> <span>Eng</span></Button><Button variant="ghost" size="sm" title="Research lens" aria-pressed={lens === 'res'} onClick={() => setLens('res')} className={lens === 'res' ? 'selected' : ''}><FlaskConical /><span>Res</span></Button></div><Button variant="outline" onClick={() => setSearch(true)} className="search-trigger rounded-full" aria-label="Search portfolio"><Search /><span className="shortcut"><kbd>Ctrl</kbd><kbd>K</kbd></span></Button><Button variant="ghost" size="icon" className="round-tool sound-tool" title={muted ? 'Enable interaction sounds' : 'Mute interaction sounds'} aria-label={muted ? 'Enable interaction sounds' : 'Mute interaction sounds'} onClick={() => setMuted(m => !m)}>{muted ? <VolumeX /> : <Volume2 />}</Button><Button variant="ghost" size="icon" className="round-tool" title="Toggle theme" aria-label="Toggle theme" onClick={() => { setLight(l => !l); localStorage.setItem('portfolio-theme', light ? 'dark' : 'light'); }}>{light ? <Sun /> : <Moon />}</Button></div></div></header><main key={pathname} className="main-content page-enter" data-lens={lens}>{children}</main><footer className="site-footer"><blockquote><span className="quote-mark">“</span><p>“The world isn't perfect. But that's the way it is.”</p><cite>~ Edward Elric, Fullmetal Alchemist</cite></blockquote><div className="footer-bottom"><div className="flex justify-center gap-6"><Link to="/about">About</Link><Link to="/contact">Contact</Link><Link to="/privacy">Privacy</Link></div><p className="mt-6 flex justify-center items-center gap-1.5">Made with <Heart size={15} className="heart-icon" /> by <strong>{profile.name}</strong></p><p className="mt-1">© 2026. All rights reserved.</p></div></footer>{search && <div className="dialog-overlay" onClick={() => setSearch(false)}><section className="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title" onClick={e => e.stopPropagation()}><div className="flex gap-3 items-center border-b border-border p-4"><Search className="text-muted-foreground" size={20} /><label id="search-title" className="sr-only" htmlFor="portfolio-search">Search portfolio</label><input id="portfolio-search" autoFocus value={query} onChange={e => setQuery(e.target.value)} placeholder="Search pages, projects, writing…" className="flex-1 min-w-0 bg-transparent outline-none" /><Button variant="ghost" size="icon" aria-label="Close search" onClick={() => setSearch(false)}><X /></Button></div><div className="p-2 max-h-96 overflow-auto">{results.length ? results.map(r => <Link key={r.title} to={r.to} onClick={() => setSearch(false)} className="search-result"><span>{r.title}<small>{r.kind}</small></span><ArrowUpRight size={16} /></Link>) : <p className="p-8 text-center text-muted-foreground">No results found.</p>}</div></section></div>}</>;
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const [light, setLight] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const [lens, setLens] = useState("eng");
+  const [search, setSearch] = useState(false);
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    setLight(localStorage.getItem("portfolio-theme") === "light");
+  }, []);
+  useEffect(() => {
+    document.documentElement.classList.toggle("light", light);
+  }, [light]);
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "k") {
+        event.preventDefault();
+        setSearch((s) => !s);
+      }
+      if (event.key === "Escape") setSearch(false);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
+  useEffect(() => {
+    setSearch(false);
+    setQuery("");
+  }, [pathname]);
+  const results = [
+    ...navigation.map((n) => ({ title: n.label, to: n.to, kind: "Page" })),
+    ...projects.map((p) => ({ title: p.name, to: "/projects" as const, kind: "Project" })),
+    ...articles.map((a) => ({ title: a.title, to: "/blog" as const, kind: "Article" })),
+  ].filter((r) => r.title.toLowerCase().includes(query.toLowerCase()));
+  const sound = () => {
+    if (muted) return;
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.value = 520;
+    gain.gain.setValueAtTime(0.025, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.09);
+    osc.onended = () => {
+      void ctx.close();
+    };
+  };
+  return (
+    <>
+      <header className="site-header">
+        <div className="nav-inner">
+          <nav aria-label="Main navigation" onClick={sound}>
+            {navigation.map((item) => (
+              <Link
+                key={item.label}
+                to={item.to}
+                className={
+                  pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to))
+                    ? "nav-link active"
+                    : "nav-link"
+                }
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="header-tools">
+            <div className="lens-switch" aria-label="Viewing lens">
+              <Button
+                variant="ghost"
+                size="sm"
+                title="Engineering lens"
+                aria-pressed={lens === "eng"}
+                onClick={() => setLens("eng")}
+                className={lens === "eng" ? "selected" : ""}
+              >
+                <Wrench /> <span>Eng</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                title="Research lens"
+                aria-pressed={lens === "res"}
+                onClick={() => setLens("res")}
+                className={lens === "res" ? "selected" : ""}
+              >
+                <FlaskConical />
+                <span>Res</span>
+              </Button>
+            </div>
+            <Button
+              variant="outline"
+              onClick={() => setSearch(true)}
+              className="search-trigger rounded-full"
+              aria-label="Search portfolio"
+            >
+              <Search />
+              <span className="shortcut">
+                <kbd>Ctrl</kbd>
+                <kbd>K</kbd>
+              </span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="round-tool sound-tool"
+              title={muted ? "Enable interaction sounds" : "Mute interaction sounds"}
+              aria-label={muted ? "Enable interaction sounds" : "Mute interaction sounds"}
+              onClick={() => setMuted((m) => !m)}
+            >
+              {muted ? <VolumeX /> : <Volume2 />}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="round-tool"
+              title="Toggle theme"
+              aria-label="Toggle theme"
+              onClick={() => {
+                setLight((l) => !l);
+                localStorage.setItem("portfolio-theme", light ? "dark" : "light");
+              }}
+            >
+              {light ? <Sun /> : <Moon />}
+            </Button>
+          </div>
+        </div>
+      </header>
+      <main key={pathname} className="main-content page-enter" data-lens={lens}>
+        {children}
+      </main>
+      <footer className="site-footer">
+        <blockquote>
+          <span className="quote-mark">“</span>
+          <p>“The world isn't perfect. But that's the way it is.”</p>
+          <cite>~ Edward Elric, Fullmetal Alchemist</cite>
+        </blockquote>
+        <div className="footer-bottom">
+          <div className="flex justify-center gap-6">
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+            <Link to="/privacy">Privacy</Link>
+          </div>
+          <p className="mt-6 flex justify-center items-center gap-1.5">
+            Made with <Heart size={15} className="heart-icon" /> by <strong>{profile.name}</strong>
+          </p>
+          <p className="mt-1">© 2026. All rights reserved.</p>
+        </div>
+      </footer>
+      {search && (
+        <div className="dialog-overlay" onClick={() => setSearch(false)}>
+          <section
+            className="search-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="search-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex gap-3 items-center border-b border-border p-4">
+              <Search className="text-muted-foreground" size={20} />
+              <label id="search-title" className="sr-only" htmlFor="portfolio-search">
+                Search portfolio
+              </label>
+              <input
+                id="portfolio-search"
+                autoFocus
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search pages, projects, writing…"
+                className="flex-1 min-w-0 bg-transparent outline-none"
+              />
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Close search"
+                onClick={() => setSearch(false)}
+              >
+                <X />
+              </Button>
+            </div>
+            <div className="p-2 max-h-96 overflow-auto">
+              {results.length ? (
+                results.map((r) => (
+                  <Link
+                    key={r.title}
+                    to={r.to}
+                    onClick={() => setSearch(false)}
+                    className="search-result"
+                  >
+                    <span>
+                      {r.title}
+                      <small>{r.kind}</small>
+                    </span>
+                    <ArrowUpRight size={16} />
+                  </Link>
+                ))
+              ) : (
+                <p className="p-8 text-center text-muted-foreground">No results found.</p>
+              )}
+            </div>
+          </section>
+        </div>
+      )}
+    </>
+  );
 }
