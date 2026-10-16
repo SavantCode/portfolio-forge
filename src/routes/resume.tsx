@@ -81,12 +81,12 @@ function ResumePage() {
               <Github className="w-4 h-4 text-primary" /> github.com/SavantCode
             </a>
             <a
-              href="https://portfolio.com"
+              href="https://rahul-kushwaha.vercel.app/"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-1.5 hover:text-foreground transition-colors"
             >
-              <Globe className="w-4 h-4 text-primary" /> portfolio.com
+              <Globe className="w-4 h-4 text-primary" /> portfolio
             </a>
           </div>
         </header>
