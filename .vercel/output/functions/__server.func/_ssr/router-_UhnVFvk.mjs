@@ -7,10 +7,10 @@ import { t as pageHead } from "./seo-Cv69kshG.mjs";
 import { t as Route$11 } from "./blog._slug-CzWHNG8P.mjs";
 import { t as Route$12 } from "./projects._slug-BrXWU4w8.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-BTP6KMjK.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-_UhnVFvk.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-CPhZc-VJ.css";
+var styles_default = "/assets/styles-b4NMEo7h.css";
 function reportLovableError(error, context = {}) {
 	if (typeof window === "undefined") return;
 	window.__lovableEvents?.captureException?.(error, {
@@ -211,9 +211,9 @@ var Route$5 = createFileRoute("/privacy")({
 });
 var $$splitComponentImporter$4 = () => import("./projects--LJrth9c.mjs");
 var Route$4 = createFileRoute("/projects")({ component: lazyRouteComponent($$splitComponentImporter$4, "component") });
-var $$splitComponentImporter$3 = () => import("./resume-CFit7LRv.mjs");
+var $$splitComponentImporter$3 = () => import("./resume-D9ZSMsEF.mjs");
 var Route$3 = createFileRoute("/resume")({
-	head: () => pageHead("Resume", "Rahul Kushwaha’s official resume and CV."),
+	head: () => pageHead("Resume", "Rahul Kushwaha's official resume and CV."),
 	component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
 var $$splitComponentImporter$2 = () => import("./work-DI7xD4o1.mjs");

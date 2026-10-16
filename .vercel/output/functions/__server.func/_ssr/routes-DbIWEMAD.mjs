@@ -2,7 +2,7 @@ import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.m
 import { t as Button } from "./button-B2wejuZy.mjs";
 import { a as projects, i as profile, t as articles } from "./portfolio-CxdzWnDu.mjs";
 import { b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { D as ArrowUpRight, O as ArrowRight, _ as FileText, o as Send, u as MapPin } from "../_libs/lucide-react.mjs";
+import { M as ArrowUpRight, N as ArrowRight, b as FileText, d as MapPin, s as Send } from "../_libs/lucide-react.mjs";
 import { n as SocialLinks } from "./site-shell-BZOjkikL.mjs";
 import { t as profile_default } from "./profile-B6OJ_f9L.mjs";
 import { t as ProjectRow } from "./project-row-CYdDO2zD.mjs";

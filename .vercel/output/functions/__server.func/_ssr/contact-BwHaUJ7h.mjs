@@ -3,7 +3,7 @@ import { n as require_react } from "../_libs/@radix-ui/react-compose-refs+[...].
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { t as Button } from "./button-B2wejuZy.mjs";
 import { i as profile } from "./portfolio-CxdzWnDu.mjs";
-import { D as ArrowUpRight, S as Copy, T as Check, d as Mail } from "../_libs/lucide-react.mjs";
+import { M as ArrowUpRight, T as Copy, f as Mail, k as Check } from "../_libs/lucide-react.mjs";
 import { n as SocialLinks } from "./site-shell-BZOjkikL.mjs";
 import { t as PageHeading } from "./page-heading-lcMjHdmu.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/contact-BwHaUJ7h.js

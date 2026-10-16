@@ -1,6 +1,6 @@
 import { n as require_jsx_runtime } from "../_libs/react+tanstack__react-query.mjs";
 import { r as experiences } from "./portfolio-CxdzWnDu.mjs";
-import { D as ArrowUpRight, m as Globe } from "../_libs/lucide-react.mjs";
+import { M as ArrowUpRight, g as Globe } from "../_libs/lucide-react.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/experience-list-DHT3Wfs_.js
 var import_jsx_runtime = require_jsx_runtime();
 function ExperienceList({ compact = false }) {
