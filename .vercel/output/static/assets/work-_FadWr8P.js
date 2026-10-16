@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./page-heading-DvG1hKFw.js";import{t as n}from"./experience-list-KPNO-wGa.js";var r=e();function i(){return(0,r.jsxs)(r.Fragment,{children:[(0,r.jsx)(t,{title:`Work`,description:`A few good teams. A lot of meaningful work.`}),(0,r.jsx)(n,{})]})}export{i as component};
